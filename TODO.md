@@ -18,9 +18,8 @@
 - [ ] data validation & sanitization
 - [ ] tests + coverage
     - [ ] jest
-    - [ ] postman
 - [ ] docker
-- [ ] CI
+- [x] CI
 - [ ] CD
 - [ ] optionnal length param
 - [ ] whiterqbbit.io
