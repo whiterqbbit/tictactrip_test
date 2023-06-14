@@ -5,12 +5,12 @@
   "main": "src/server.ts",
   "packageManager": "pnpm@8.6.0",
   "scripts": {
-    "dev": "nodemon src/server.ts",
+    "dev": "nodemon src/startServer.ts",
     "build": "tsc",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "pre-commit": "pnpm lint && pnpm typecheck",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --coverage"
   },
   "author": "whiterqbbit",
   "license": "MIT",
@@ -21,12 +21,17 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.17",
+    "@types/jest": "^29.5.2",
     "@types/morgan": "^1.9.4",
+    "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.59.11",
     "eslint": "^8.42.0",
+    "jest": "^29.5.0",
     "lint-staged": "^13.2.2",
     "nodemon": "^2.0.22",
     "simple-git-hooks": "^2.8.1",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
     "typescript": "5.0.4"
   },
