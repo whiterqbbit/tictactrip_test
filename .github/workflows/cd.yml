@@ -30,4 +30,4 @@ jobs:
         application_name: tictactrip-test
         environment_name: tictactrip-env
         version_label: ${{ github.run_id }}
-        region: eu-west-4
+        region: eu-west-3
