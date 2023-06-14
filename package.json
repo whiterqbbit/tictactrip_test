@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "The one and only API for to justify all your text",
   "main": "src/server.ts",
+  "packageManager": "pnpm@8.6.0",
   "scripts": {
     "dev": "nodemon src/server.ts",
     "build": "tsc",
