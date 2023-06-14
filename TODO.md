@@ -2,7 +2,7 @@
 
 - [x] init
 - [ ] app structure
-- [ ] tsconfig
+- [x] tsconfig
 - [ ] fonction justify
 - [ ] auth
 - [ ] rate limit
@@ -11,16 +11,17 @@
 
 # Bonus
 
-- [ ] eslint
+- [x] eslint
 - [ ] morgan
 - [ ] helmet
-- [ ] precommit hook
+- [x] precommit hook
 - [ ] data validation & sanitization
 - [ ] tests + coverage
     - [ ] jest
     - [ ] postman
 - [ ] docker
-- [ ] CI/CD
+- [ ] CI
+- [ ] CD
 - [ ] optionnal length param
 - [ ] whiterqbbit.io
 - [ ] readme

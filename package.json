@@ -8,6 +8,7 @@
     "build": "tsc",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
+    "pre-commit": "pnpm lint && pnpm typecheck",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "whiterqbbit",
@@ -22,8 +23,13 @@
     "@types/morgan": "^1.9.4",
     "@typescript-eslint/eslint-plugin": "^5.59.11",
     "eslint": "^8.42.0",
+    "lint-staged": "^13.2.2",
     "nodemon": "^2.0.22",
+    "simple-git-hooks": "^2.8.1",
     "ts-node": "^10.9.1",
     "typescript": "5.0.4"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm pre-commit"
   }
 }
