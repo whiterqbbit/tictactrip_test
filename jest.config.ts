@@ -5,4 +5,6 @@ module.exports = {
   moduleNameMapper: {
     '^test/(.*)': '<rootDir>/test/$1',
   },
+  clearMocks: true,
+  // setupFilesAfterEnv: ['./test/mocks.ts'],
 }

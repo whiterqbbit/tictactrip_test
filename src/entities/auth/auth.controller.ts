@@ -1,7 +1,6 @@
 import { Request, Response } from 'express'
-import jwt from 'jsonwebtoken'
-import config from '../../../config'
 import validator from 'validator'
+import { getUserByEmail, createUser } from '../../models/user.model'
 
 export class AuthController {
   static async getToken (req: Request, res: Response) {
@@ -15,11 +14,14 @@ export class AuthController {
       return res.status(400).json({ error: 'Email is invalid' })
     }
 
-    const token = jwt.sign({ email }, config.JWT_SECRET as string, {
-      expiresIn: '24h'
-    })
+    const user = await getUserByEmail(email)
 
-    return res.json({ token })
+    if (!user) {
+      console.log('creating user- ========')
+      const token = await createUser(email).then(user => user.token)
+      return res.json({ token })
+    }
+    return res.json({ token: user.token })
   }
 }
 

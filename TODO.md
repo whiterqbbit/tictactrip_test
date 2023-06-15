@@ -5,8 +5,9 @@
 - [x] tsconfig
 - [ ] fonction justify
 - [x] auth
-- [ ] prisma & postgres
-- [ ] rate limit
+- [x] local prisma & postgres
+- [ ] RDS
+- [x] rate limit
 - [x] Elastic Beanstalk
 
 
@@ -18,6 +19,7 @@
 - [x] precommit hook
 - [ ] data validation & sanitization
 - [ ] tests + coverage
+  - [ ] mock jwt
 - [ ] docker
 - [x] CI
 - [x] CD
