@@ -1,6 +1,9 @@
 import request from 'supertest'
 import app from '../../../src/app'
-import { longText, shortQuote } from 'test/__data__/testdata'
+import { shortQuote } from 'test/__data__/testdata'
+
+// TODO : test length > 80000
+// TODO : test correct justification
 
 describe('POST api/justify', () => {
   it('responds with a message', async () => {
@@ -22,5 +25,20 @@ describe('POST api/justify', () => {
 
     expect(response.statusCode).toBe(415)
     expect(response.body.message).toBe('Invalid Content-Type. Expected text/plain.')
+  })
+
+  it('outputs 80 characters lines', async () => {
+    const response = await request(app)
+      .post('/api/justify')
+      .set('Content-Type', 'text/plain')
+      .send(shortQuote)
+
+    expect(response.statusCode).toBe(200)
+    expect(response.type).toBe('text/plain')
+
+    const lines = response.text.split('\n')
+    for (let i = 0; i < lines.length - 1; i++) {
+      expect(lines[i].length).toBe(80)
+    }
   })
 })
