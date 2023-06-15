@@ -5,8 +5,8 @@
   "main": "src/server.ts",
   "packageManager": "pnpm@8.6.0",
   "scripts": {
-    "start": "node src/startServer.js",
-    "dev": "nodemon src/startServer.ts",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.ts",
     "build": "tsc",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
