@@ -1,7 +1,7 @@
 # TODO
 
 - [x] init
-- [ ] app structure
+- [x] app structure
 - [x] tsconfig
 - [ ] fonction justify
 - [ ] auth
