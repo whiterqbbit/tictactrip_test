@@ -6,7 +6,7 @@
 - [ ] fonction justify
 - [ ] auth
 - [ ] rate limit
-- [ ] ec2
+- [x] Elastic Beanstalk
 
 
 # Bonus
@@ -20,7 +20,7 @@
     - [ ] jest
 - [ ] docker
 - [x] CI
-- [ ] CD
+- [x] CD
 - [ ] optionnal length param
 - [ ] whiterqbbit.io
 - [ ] readme
