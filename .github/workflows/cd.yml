@@ -24,7 +24,8 @@ jobs:
 
     - name: Zip build artifacts
       run: |
-        zip -r build.zip ./dist/
+        cp package.json dist/ 
+        zip -r build.zip ./dist/*
 
     - name: Deploy to Elastic Beanstalk
       uses: einaregilsson/beanstalk-deploy@v14
