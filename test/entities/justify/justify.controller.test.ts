@@ -1,21 +1,26 @@
 import request from 'supertest'
 import app from '../../../src/app'
+import { longText, shortQuote } from 'test/__data__/testdata'
 
 describe('POST api/justify', () => {
   it('responds with a message', async () => {
     const response = await request(app)
       .post('/api/justify')
-      .send({ text: 'Fabien' })
+      .set('Content-Type', 'text/plain')
+      .send('Fabien')
+
     expect(response.statusCode).toBe(200)
-    expect(response.body.message).toBe('Let us justify, Fabien !')
+    expect(response.type).toBe('text/plain')
+    expect(response.text).toBe('Fabien')
   })
 
-  it('responds with an error', async () => {
+  it('only accepts text/plain', async () => {
     const response = await request(app)
       .post('/api/justify')
-      .send({ text: 123 })
-    expect(response.statusCode).toBe(500)
-    console.log((response.text))
-    expect(response.body.error).toBe('Input must be a string')
+      .set('Content-Type', 'application/json')
+      .send({ name: 'Fabien' })
+
+    expect(response.statusCode).toBe(415)
+    expect(response.body.message).toBe('Invalid Content-Type. Expected text/plain.')
   })
 })
