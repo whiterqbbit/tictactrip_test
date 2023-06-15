@@ -16,6 +16,7 @@
     "plugins": ["@typescript-eslint"],
     "rules": {
         "@typescript-eslint/brace-style": ["error", "1tbs", {"allowSingleLine": true}],
+        "@typescript-eslint/no-non-null-assertion": "off",
         "indent": ["error", 2],
         "linebreak-style": ["error", "unix"],
         "quotes": ["error", "single"],
