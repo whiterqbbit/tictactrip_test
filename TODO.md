@@ -12,8 +12,8 @@
 # Bonus
 
 - [x] eslint
-- [ ] morgan
-- [ ] helmet
+- [x] morgan
+- [x] helmet
 - [x] precommit hook
 - [ ] data validation & sanitization
 - [ ] tests + coverage
