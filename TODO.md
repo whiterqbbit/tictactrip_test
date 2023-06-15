@@ -24,7 +24,7 @@
 - [x] CI
 - [x] CD
 - [ ] optionnal length param
-- [ ] whiterqbbit.io
+- [x] whiterqbbit.io
 - [ ] readme
 - [ ] doc / swagger
 - [ ] winston ?
