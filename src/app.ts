@@ -33,9 +33,12 @@ app.use('/api', Router)
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err: Error, req: Request, res: Response, next: NextFunction ) => {
-  if (err instanceof HttpError) res.status(err.statusCode)
-  else res.status(500)
-  
+  if (err instanceof HttpError) {
+    res.status(err.statusCode)
+  } else {
+    res.status(500)
+  } 
+
   console.error('ERROR:', err.message)
   res.json({ error: err.message })
 })
