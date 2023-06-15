@@ -25,6 +25,7 @@ jobs:
     - name: Zip build artifacts
       run: |
         cp package.json dist/ 
+        cp pnpm-lock.yaml dist/
         zip -r build.zip ./dist/*
 
     - name: Deploy to Elastic Beanstalk
