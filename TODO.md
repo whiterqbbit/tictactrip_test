@@ -4,7 +4,8 @@
 - [x] app structure
 - [x] tsconfig
 - [ ] fonction justify
-- [ ] auth
+- [x] auth
+- [ ] prisma & postgres
 - [ ] rate limit
 - [x] Elastic Beanstalk
 
@@ -17,7 +18,6 @@
 - [x] precommit hook
 - [ ] data validation & sanitization
 - [ ] tests + coverage
-    - [ ] jest
 - [ ] docker
 - [x] CI
 - [x] CD
@@ -27,6 +27,7 @@
 - [ ] doc / swagger
 - [ ] winston ?
 - [ ] monitoring / alerting ?
+- [ ] vérifier si http-error est dispensable
 
 
 # Autres
