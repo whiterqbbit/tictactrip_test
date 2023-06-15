@@ -26,6 +26,7 @@ jobs:
       run: |
         cp package.json dist/ 
         cp pnpm-lock.yaml dist/
+        cp Procfile dist/
         zip -r build.zip ./dist/*
 
     - name: Deploy to Elastic Beanstalk
