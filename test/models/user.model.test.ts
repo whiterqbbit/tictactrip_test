@@ -21,7 +21,7 @@ describe('User functions', () => {
     const user = await createUser('test@mail.com')
   
     expect(prismaMock.user.create).toBeCalledWith({
-      data: { email: 'test@mail.com', token: mockSign() },
+      data: { email: 'test@mail.com', token: 'mockToken' },
     })
     expect(user).toEqual(mockUser)
   })

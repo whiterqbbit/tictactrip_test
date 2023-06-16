@@ -1,11 +1,12 @@
 import { PrismaClient } from '@prisma/client'
-import { mockDeep, mockReset, DeepMockProxy } from 'jest-mock-extended'
-import prisma from '../prisma/prisma.client'
+import { mockDeep, mockReset, mockClear } from 'jest-mock-extended'
 import jwt from 'jsonwebtoken'
+
+export const prismaMock = mockDeep<PrismaClient>()
 
 jest.mock('../prisma/prisma.client', () => ({
   __esModule: true,
-  default: mockDeep<PrismaClient>(),
+  default: prismaMock,
 }))
 
 jest.mock('jsonwebtoken', () => ({
@@ -14,8 +15,9 @@ jest.mock('jsonwebtoken', () => ({
 }))
 
 beforeEach(() => {
-  mockReset(prismaMock)
+  // prismaMock.$disconnect.mockReset()
+  // mockReset(prismaMock)
+  mockClear(prismaMock)
 })
 
-export const prismaMock = prisma as unknown as DeepMockProxy<PrismaClient>
 export const jwtMock = jwt as unknown as jest.Mocked<typeof jwt>
