@@ -11,6 +11,6 @@ RUN npm run postinstall
 
 COPY . .
 
-EXPOSE 8080
+EXPOSE 3000
 
 CMD npm run migrate && npm run dev
