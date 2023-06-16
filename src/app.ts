@@ -9,7 +9,6 @@ import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt'
 import config from '../config'
 import swaggerUi from 'swagger-ui-express'
 import YAML from 'yamljs'
-import path from 'path'
 
 const app = express()
 
@@ -35,6 +34,8 @@ const opts = {
 passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
   return done(null, jwt_payload.email)
 }))
+
+app.set('trust proxy', true)
 
 app.get('/', (req, res) => {
   res.send('🐘')
