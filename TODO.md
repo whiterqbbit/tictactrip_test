@@ -23,7 +23,6 @@
 - [ ] docker
 - [x] CI
 - [x] CD
-- [ ] optionnal length param
 - [x] whiterqbbit.io
 - [ ] readme
 - [ ] doc / swagger

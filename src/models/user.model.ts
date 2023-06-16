@@ -31,10 +31,17 @@ async function updateWordCount(email: string, wordCount: number) {
   })
 }
 
+async function updateToken(email: string, token: string) {
+  return await prisma.user.update({
+    where: { email },
+    data: { token },
+  })
+}
+
 async function deleteUser(email: string) {
   return await prisma.user.delete({
     where: { email },
   })
 }
 
-export { getUserByEmail, getUserByToken, createUser, updateWordCount, deleteUser }
+export { getUserByEmail, getUserByToken, createUser, updateWordCount, deleteUser, updateToken }

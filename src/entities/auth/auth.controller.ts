@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import validator from 'validator'
 import { getUserByEmail, createUser } from '../../models/user.model'
+import { AuthHelper } from './auth.helper'
 
 export class AuthController {
   static async getToken (req: Request, res: Response) {
@@ -17,11 +18,12 @@ export class AuthController {
     const user = await getUserByEmail(email)
 
     if (!user) {
-      console.log('creating user- ========')
       const token = await createUser(email).then(user => user.token)
       return res.json({ token })
+    } else {
+      const token = await AuthHelper.renewIfExpired(user)
+      return res.json({ token })
     }
-    return res.json({ token: user.token })
   }
 }
 
