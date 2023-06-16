@@ -115,8 +115,8 @@ describe('POST api/justify', () => {
       .post('/api/justify')
       .set('Content-Type', 'text/plain')
       .set('Authorization', `Bearer ${token}`)
-      .send('   \n\n       ' + 'Fabien      est \n     la' + '  ')
+      .send('.................\n\n....       .....  ....\n \n........\nFabien      est \n     la\n\n...............  ')
 
-    expect(response.text).toBe('Fabien est la')
+    expect(response.text).toBe('................. .... ..... .... ........ Fabien est la ...............')
   })
 })

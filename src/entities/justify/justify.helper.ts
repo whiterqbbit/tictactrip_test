@@ -3,8 +3,8 @@ import config from '../../../config'
 const targetLineLength = config.LINE_LENGTH // 80
 export default class JustifyHelper {
   static justify(textInput: string) {
-    // trim first and last spaces, remove consecutive spaces
-    const sanitizedText = textInput.trim().replace(/\s\s+/g, ' ') 
+    // trim first and last spaces, remove consecutive spaces and line breaks
+    const sanitizedText = textInput.trim().replace(/\s+/g, ' ').replace(/(\r\n|\n|\r)/gm, ' ')
   
     if (sanitizedText.length <= targetLineLength) {
       return sanitizedText
