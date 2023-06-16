@@ -48,6 +48,16 @@ describe('POST api/justify', () => {
     expect(response.statusCode).toBe(401)
   })
 
+  it('responds with 401 when token is invalid', async () => {
+    const response = await request(app)
+      .post('/api/justify')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', 'Bearer nonexistenttoken')
+      .send({ name: 'Fabien' })
+
+    expect(response.statusCode).toBe(401)
+  })
+  
   it('responds with 402 when daily limit is exceeded', async () => {
     await updateWordCount('test@mail.com', 79999)
     const response = await request(app)
