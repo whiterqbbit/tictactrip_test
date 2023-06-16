@@ -34,7 +34,6 @@ app.get('/', (req, res) => {
 const swaggerDocument = YAML.load('./swagger.yml')
 app.use('/api-docs', swaggerUi.serve)
 app.get('/api-docs', (req, res) => {
-  res.setHeader('Content-Type', 'text/html')
   res.send(swaggerUi.generateHTML(swaggerDocument))
 })
 
