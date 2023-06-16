@@ -7,11 +7,11 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.ts",
-    "generate": "prisma generate",
     "build": "tsc",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "pre-commit": "pnpm lint && pnpm typecheck && pnpm test",
+    "postinstall": "prisma generate",
     "test": "jest --coverage"
   },
   "author": "whiterqbbit",
@@ -30,6 +30,7 @@
     "morgan": "^1.10.0",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
+    "prisma": "^4.15.0",
     "validator": "^13.9.0"
   },
   "devDependencies": {
@@ -43,7 +44,6 @@
     "jest-mock-extended": "^3.0.4",
     "lint-staged": "^13.2.2",
     "nodemon": "^2.0.22",
-    "prisma": "^4.15.0",
     "simple-git-hooks": "^2.8.1",
     "supertest": "^6.3.3",
     "ts-jest": "^29.1.0",
