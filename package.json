@@ -2,19 +2,20 @@
   "name": "justife-for-all-api",
   "version": "0.0.1",
   "description": "The one and only API for to justify all your text",
-  "main": "src/server.ts",
+  "main": "index.ts",
   "packageManager": "pnpm@8.6.0",
   "engines": {
     "node": "16.x"
   },
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node dist/src/index.js",
     "dev": "nodemon src/index.ts",
     "build": "tsc",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "pre-commit": "pnpm lint && pnpm typecheck && pnpm test",
-    "postinstall": "prisma generate",
+    "postinstall": "npx prisma generate",
+    "migrate": "npx prisma migrate dev --name init",
     "test": "jest --coverage"
   },
   "author": "whiterqbbit",
