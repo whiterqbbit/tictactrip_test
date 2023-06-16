@@ -6,7 +6,7 @@
 - [x] fonction justify
 - [x] auth
 - [x] local prisma & postgres
-- [ ] RDS
+- [x] RDS
 - [x] rate limit
 - [x] Elastic Beanstalk
 
@@ -24,7 +24,7 @@
 - [x] whiterqbbit.io
 - [ ] readme
 - [x] doc / swagger
-- [ ] vérifier si http-error est dispensable
+- [x] vérifier si http-error est dispensable
 
 
 # Autres
