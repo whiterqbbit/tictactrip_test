@@ -12,37 +12,46 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:
-    - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '16'
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
 
-    - name: Install dependencies and build
-      run: |
-        npm install --unsafe-perm
-        npm run build
+      - name: Build, tag, and push Docker image to Amazon ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: tictactrip
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
-    - name: Prisma generate
-      run: |
-        npm run postinstall
+      - name: Prepare Dockerrun file
+        run: |
+          cat << EOF > Dockerrun.aws.json
+          {
+            "AWSEBDockerrunVersion": "1",
+            "Image": {
+              "Name": "${{ steps.login-ecr.outputs.registry }}/tictactrip:${{ github.sha }}",
+              "Update": "true"
+            },
+            "Ports": [
+              {
+                "ContainerPort": "8080"
+              }
+            ]
+          }
+          EOF
 
-    - name: Zip build artifacts
-      run: |
-        cp package.json dist/ 
-        cp package-lock.json dist/
-        cp Procfile dist/
-        cd dist
-        zip -r ../build.zip .
-
-    - name: Deploy to Elastic Beanstalk
-      uses: einaregilsson/beanstalk-deploy@v14
-      with:
-        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        application_name: tictactrip-test
-        environment_name: tictactrip-env
-        version_label: '${{ github.run_id }}-${{ github.run_number }}'
-        region: eu-west-3
-        deployment_package: ./build.zip
+      - name: Deploy to Elastic Beanstalk
+        uses: einaregilsson/beanstalk-deploy@v14
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: tictactrip-docker
+          environment_name: Tictactrip-docker-env
+          version_label: '${{ github.run_id }}-${{ github.run_number }}'
+          region: eu-west-3
+          deployment_package: Dockerrun.aws.json
