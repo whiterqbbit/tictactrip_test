@@ -27,7 +27,7 @@ To set up and run this project locally, follow the below steps:
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone <repo-url>
+   git clone https://github.com/whiterqbbit/tictactrip_test
     ```
 
 2. Fill in the environment variables in `.env` file:
@@ -44,4 +44,11 @@ To set up and run this project locally, follow the below steps:
     docker-compose up
     ```
 
-4. Setup your pre-commit hook if needed
+4. Setup your pre-commit hook if needed in .git/hooks/pre-commit:
+
+    ```bash
+    #!/bin/sh
+    export PATH="path/to/pnpm:$PATH"
+    export PATH="path/to/node:$PATH"
+    pnpm pre-commit
+    ```
