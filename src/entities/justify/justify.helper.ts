@@ -2,6 +2,38 @@ import config from '../../../config'
 
 const targetLineLength = config.LINE_LENGTH // 80
 export default class JustifyHelper {
+  static justify(textInput: string) {
+    // trim first and last spaces, remove consecutive spaces
+    const sanitizedText = textInput.trim().replace(/\s\s+/g, ' ') 
+  
+    if (sanitizedText.length <= targetLineLength) {
+      return sanitizedText
+    }
+      
+    // divide input into an array of lines
+    const lines = []
+    let remainingText = sanitizedText
+    while (remainingText.length > targetLineLength) {
+      const { line, remainingText: newText } = this.separateLineFromText(remainingText)
+      lines.push(line)
+      remainingText = newText
+      if (remainingText.length < targetLineLength) {
+        lines.push(remainingText)
+      }
+    }
+      
+    // justify each line except the last one
+    let justifiedText = ''
+    for (let i = 0; i < lines.length; i++) {
+      if (i !== lines.length - 1) {
+        justifiedText += this.justifyLine(lines[i]) + '\n'
+      } else {
+        justifiedText += lines[i]
+      }
+    }
+  
+    return justifiedText
+  }
 
   // takes a text and returns the first line cut out and the remaining text
   private static separateLineFromText(text: string) {
@@ -42,39 +74,5 @@ export default class JustifyHelper {
     }
 
     return justifiedLine
-  }
-
-  static justify(textInput: string) {
-    let justifiedText = ''
-
-    // trim first and last spaces, remove consecutive spaces
-    const sanitizedText = textInput.trim().replace(/\s\s+/g, ' ') 
-
-    if (sanitizedText.length <= targetLineLength) {
-      return sanitizedText
-    }
-    
-    // divide input into an array of lines
-    let remainingText = sanitizedText
-    const lines = []
-    while (remainingText.length > targetLineLength) {
-      const { line, remainingText: newText } = this.separateLineFromText(remainingText)
-      lines.push(line)
-      remainingText = newText
-      if (remainingText.length < targetLineLength) {
-        lines.push(remainingText)
-      }
-    }
-
-    // justify each line except the last one
-    for (let i = 0; i < lines.length; i++) {
-      if (i !== lines.length - 1) {
-        justifiedText += this.justifyLine(lines[i]) + '\n'
-      } else {
-        justifiedText += lines[i]
-      }
-    }
-
-    return justifiedText
   }
 }
