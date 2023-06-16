@@ -7,6 +7,8 @@ import { HttpError } from './utils/HttpError'
 import passport from 'passport'
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt'
 import config from '../config'
+import swaggerUi from 'swagger-ui-express'
+import YAML from 'yamljs'
 
 const app = express()
 
@@ -28,6 +30,9 @@ passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
 app.get('/', (req, res) => {
   res.send('🐘')
 })
+
+const swaggerDocument = YAML.load('./swagger.yml')
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 app.use('/api', Router)
 
