@@ -4,6 +4,9 @@
   "description": "The one and only API for to justify all your text",
   "main": "src/server.ts",
   "packageManager": "pnpm@8.6.0",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.ts",
