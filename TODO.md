@@ -3,7 +3,7 @@
 - [x] init
 - [x] app structure
 - [x] tsconfig
-- [ ] fonction justify
+- [x] fonction justify
 - [x] auth
 - [x] local prisma & postgres
 - [ ] RDS
@@ -17,17 +17,13 @@
 - [x] morgan
 - [x] helmet
 - [x] precommit hook
-- [ ] data validation & sanitization
 - [ ] tests + coverage
   - [ ] mock jwt
-- [ ] docker
 - [x] CI
 - [x] CD
 - [x] whiterqbbit.io
 - [ ] readme
 - [ ] doc / swagger
-- [ ] winston ?
-- [ ] monitoring / alerting ?
 - [ ] vérifier si http-error est dispensable
 
 

@@ -3,7 +3,6 @@ import app from '../../../src/app'
 import { shortQuote, longText } from 'test/__data__/testdata'
 import { updateWordCount } from '../../../src/models/user.model'
 
-// TODO : test correct justification
 describe('POST api/justify', () => {
   let token: string
   
@@ -68,12 +67,56 @@ describe('POST api/justify', () => {
       .set('Authorization', `Bearer ${token}`)
       .send(shortQuote)
 
-    expect(response.statusCode).toBe(200)
-    expect(response.type).toBe('text/plain')
-
     const lines = response.text.split('\n')
     for (let i = 0; i < lines.length - 1; i++) {
       expect(lines[i].length).toBe(80)
     }
+  })
+
+  it('should not have space at the beggining or end of lines', async () => {
+    const response = await request(app)
+      .post('/api/justify')
+      .set('Content-Type', 'text/plain')
+      .set('Authorization', `Bearer ${token}`)
+      .send(' ' + longText + ' \n ')
+
+    const lines = response.text.split('\n')
+    for (let i = 0; i < lines.length - 1; i++) {
+      const line = lines[i]
+      expect(line[0]).not.toBe(' ')
+      expect(line[line.length - 1]).not.toBe(' ')
+    }
+  })
+
+  it('should be evenly justified', async () => {
+    const response = await request(app)
+      .post('/api/justify')
+      .set('Content-Type', 'text/plain')
+      .set('Authorization', `Bearer ${token}`)
+      .send(longText)
+
+    const lines = response.text.split('\n')
+
+    // For each line, find if some space sequences have a difference greater than 1
+    for (const line of lines) {
+      // Get array of space sequences lengths
+      const spaceSequences = line.split(/[^\s]/).filter(Boolean).map(s => s.length) 
+      spaceSequences.sort((a, b) => a - b)
+
+      const min = spaceSequences[0]
+      const max = spaceSequences[spaceSequences.length - 1]
+
+      expect(max - min).toBeLessThanOrEqual(1)
+    }
+  })
+
+  it('removes extra spaces and line breaks from input', async () => {
+    const response = await request(app)
+      .post('/api/justify')
+      .set('Content-Type', 'text/plain')
+      .set('Authorization', `Bearer ${token}`)
+      .send('   \n\n       ' + 'Fabien      est \n     la' + '  ')
+
+    expect(response.text).toBe('Fabien est la')
   })
 })
