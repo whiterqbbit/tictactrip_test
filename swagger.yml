@@ -1,0 +1,88 @@
+swagger: '2.0'
+info:
+  version: '1.0.0'
+  title: Text Justification API
+  description: API for text justification
+
+schemes:
+  - http
+  - https
+host: localhost:8000
+basePath: /api
+
+securityDefinitions:
+  ApiKeyAuth:        
+    type: apiKey
+    in: header       
+    name: X-API-KEY  
+
+paths:
+  /:
+    get:
+      summary: What a nice emoji !
+      responses:
+        '200':
+          description: An emoji
+          schema:
+            type: string
+  /justify:
+    post:
+      summary: Justify a text
+      description: Send a POST request with a body of ContentType text/plain and get back justified text.
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - in: body
+          name: text
+          description: The text to justify. Content-Type should be text/plain.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Text justified successfully
+          schema:
+            type: string
+        '402':
+          description: You have exceeded your daily limit
+          schema:
+            type: string
+        '403':
+          description: No authentification token
+          schema:
+            type: string
+        '415':
+          description: Invalid Content-Type. Expected text/plain.
+          schema:
+            type: string
+
+
+  /token:
+    post:
+      summary: Obtain a token
+      description: Send a POST request with a json body containing an email field and get a token back.
+      parameters:
+        - in: body
+          name: email
+          description: Email linked to the token
+          required: true
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+      responses:
+        '200':
+          description: Token retrieved successfully
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+        '400':
+          description: Bad Request - Email is required or Email is invalid
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
