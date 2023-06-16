@@ -9,22 +9,15 @@ import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt'
 import config from '../config'
 import swaggerUi from 'swagger-ui-express'
 import YAML from 'yamljs'
+import cors from 'cors'
 
 const app = express()
-
-// app.use((req, res, next) => {
-//   if (req.header('x-forwarded-proto') !== 'https') {
-//     res.redirect(`https://${req.header('host')}${req.url}`)
-//   } else {
-//     next()
-//   }
-// })
-
 
 app.use(express.text())
   .use(express.json())
   .use(morgan('tiny'))
   .use(passport.initialize())
+  .use(cors())
   .use(helmet({
     contentSecurityPolicy: {
       directives: {
@@ -34,6 +27,15 @@ app.use(express.text())
       }
     }
   }))
+
+app.use((req, res, next) => {
+  res.header(
+    'Content-Security-Policy',
+    'default-src \'self\'; img-src \'self\' https:; script-src \'self\' https:; style-src \'self\' https:'
+  )
+  next()
+})
+  
 
 const opts = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
