@@ -32,7 +32,10 @@ app.get('/', (req, res) => {
 })
 
 const swaggerDocument = YAML.load('./swagger.yml')
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+app.use('/api-docs', (req, res) => {
+  res.setHeader('Content-Type', 'text/html')
+  res.send(swaggerDocument)
+}), swaggerUi.setup(swaggerDocument)
 
 app.use('/api', Router)
 

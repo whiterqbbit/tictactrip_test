@@ -1,20 +1,14 @@
 swagger: '2.0'
 info:
   version: '1.0.0'
-  title: Text Justification API
-  description: API for text justification
+  title: Justife for All
+  description: an API for justifying needs
 
 schemes:
   - http
   - https
-host: localhost:8000
+host: tictactrip.whiterqbbit.io
 basePath: /api
-
-securityDefinitions:
-  ApiKeyAuth:        
-    type: apiKey
-    in: header       
-    name: X-API-KEY  
 
 paths:
   /:

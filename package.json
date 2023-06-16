@@ -1,7 +1,7 @@
 {
   "name": "justife-for-all-api",
-  "version": "0.0.1",
-  "description": "The one and only API for to justify all your text",
+  "version": "1.0.0",
+  "description": "an API for justifying needs",
   "main": "index.ts",
   "packageManager": "pnpm@8.6.0",
   "engines": {
