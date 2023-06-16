@@ -15,14 +15,18 @@ export class AuthController {
       return res.status(400).json({ error: 'Email is invalid' })
     }
 
-    const user = await getUserByEmail(email)
-
-    if (!user) {
-      const token = await createUser(email).then(user => user.token)
-      return res.json({ token })
-    } else {
-      const token = await AuthHelper.renewIfExpired(user)
-      return res.json({ token })
+    try{
+      const user = await getUserByEmail(email)
+      if (user) {
+        const token = await AuthHelper.renewIfExpired(user)
+        return res.json({ token })
+      } else {
+        const token = await createUser(email).then(user => user.token)
+        return res.json({ token })
+      }
+    } catch (err) {
+      console.error(err)
+      return res.status(500).json({ error: 'Error getting user' })
     }
   }
 }
