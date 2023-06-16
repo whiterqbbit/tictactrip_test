@@ -16,8 +16,16 @@ const app = express()
 app.use(express.text())
   .use(express.json())
   .use(morgan('tiny'))
-  .use(helmet())
   .use(passport.initialize())
+  .use(helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ['\'self\''],
+        scriptSrc: ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
+        styleSrc: ['\'self\'', '\'unsafe-inline\'']
+      }
+    }
+  }))
 
 const opts = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -33,18 +41,7 @@ app.get('/', (req, res) => {
 })
 
 const swaggerDocument = YAML.load('./swagger.yml')
-app.use('/api-docs', (req: Request, res: Response, next: NextFunction) => {
-  const ext = path.extname(req.url)
-  if (ext === '.js') {
-    res.type('application/javascript')
-  } else if (ext === '.css') {
-    res.type('text/css')
-  } else if (ext === '.html') {
-    res.type('text/html')
-  }
-  next()
-}, swaggerUi.serve, swaggerUi.setup(swaggerDocument))
-
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 app.use('/api', Router)
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
