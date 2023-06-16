@@ -14,24 +14,24 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Setup pnpm
-      uses: pnpm/action-setup@v2
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
       with:
-        version: latest
+        node-version: '16'
 
     - name: Install dependencies and build
       run: |
-        pnpm install
-        pnpm run build
+        npm install --unsafe-perm
+        npm run build
 
     - name: Prisma generate
       run: |
-        pnpm run postinstall
+        npm run postinstall
 
     - name: Zip build artifacts
       run: |
         cp package.json dist/ 
-        cp pnpm-lock.yaml dist/
+        cp package-lock.json dist/
         cp Procfile dist/
         cd dist
         zip -r ../build.zip .
