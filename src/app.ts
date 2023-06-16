@@ -9,6 +9,7 @@ import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt'
 import config from '../config'
 import swaggerUi from 'swagger-ui-express'
 import YAML from 'yamljs'
+import path from 'path'
 
 const app = express()
 
@@ -32,10 +33,17 @@ app.get('/', (req, res) => {
 })
 
 const swaggerDocument = YAML.load('./swagger.yml')
-app.use('/api-docs', swaggerUi.serve)
-app.get('/api-docs', (req, res) => {
-  res.send(swaggerUi.generateHTML(swaggerDocument))
-})
+app.use('/api-docs', (req: Request, res: Response, next: NextFunction) => {
+  const ext = path.extname(req.url)
+  if (ext === '.js') {
+    res.type('application/javascript')
+  } else if (ext === '.css') {
+    res.type('text/css')
+  } else if (ext === '.html') {
+    res.type('text/html')
+  }
+  next()
+}, swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 app.use('/api', Router)
 
