@@ -15,14 +15,19 @@ export class JustifyController {
       
       const textInput = req.body
       const inputWordCount = textInput.split(' ').length
-      const newWordCount = user!.wordCount + inputWordCount
+
+      if (!user) {
+        throw new HttpError('Invalid token', 401)
+      }
+
+      const newWordCount = user.wordCount + inputWordCount
       
       if (newWordCount > config.DAILY_LIMIT) {
         throw new HttpError('You have exceeded your daily limit', 402)
       }
 
       const justifiedText = helper.justify(textInput)
-      await updateWordCount(user!.email, newWordCount)
+      await updateWordCount(user.email, newWordCount)
 
       res.status(200).type('text/plain').send(justifiedText)
     } catch (error) {
