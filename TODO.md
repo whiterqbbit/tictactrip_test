@@ -22,7 +22,7 @@
 - [x] CI
 - [x] CD
 - [x] whiterqbbit.io
-- [ ] readme
+- [x] readme
 - [x] doc / swagger
 - [x] vérifier si http-error est dispensable
 
