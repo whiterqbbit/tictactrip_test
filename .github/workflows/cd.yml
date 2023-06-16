@@ -24,6 +24,10 @@ jobs:
         pnpm install
         pnpm run build
 
+    - name: Prisma generate
+      run: |
+        pnpm run postinstall
+
     - name: Zip build artifacts
       run: |
         cp package.json dist/ 
