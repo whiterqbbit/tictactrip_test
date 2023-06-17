@@ -54,8 +54,8 @@ jobs:
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: tictactrip-docker
-          environment_name: Tictactrip-docker-env
+          application_name: tictactrip-docker-2
+          environment_name: Tictactrip-docker-2-env
           version_label: '${{ github.run_id }}-${{ github.run_number }}'
           region: eu-west-3
           deployment_package: Dockerrun.aws.json
