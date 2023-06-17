@@ -17,8 +17,8 @@
 - [x] morgan
 - [x] helmet
 - [x] precommit hook
-- [ ] tests + coverage
-  - [ ] mock jwt
+- [-] tests + coverage
+  - [-] mock jwt
 - [x] CI
 - [x] CD
 - [x] whiterqbbit.io
@@ -29,4 +29,4 @@
 
 # Autres
 
-- [ ] mail jobs@tictactrip.fr    OBJET : FULLSTACK@BONNEFOY GUILLAUME
+- [x] mail jobs@tictactrip.fr    OBJET : FULLSTACK@BONNEFOY GUILLAUME
