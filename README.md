@@ -1,24 +1,25 @@
 # Justife For All - Text Justifier API
 
-Welcome to Justife For All, the one and only API for justifying all your text. This is a Node.js API utilizing Express and Prisma. It allows you to send plain text and return it fully justified according to your settings.
+Welcome to Justife For All, the one and only API for justifying all your text.
+Throw plain text, receive justification !
 
 ## API Endpoints
 
-The base URL for all API endpoints is `http://tictactrip.whiterqbbit.io/`.
+The base URL for all API endpoints is [https://tictactrip.whiterqbbit.io/](https://tictactrip.whiterqbbit.io/)
 
 1. **Root Endpoint** (`/`): 
 
     A `GET` request to this endpoint returns a nice emoji. Not much about it.
 
-2. **Justify Endpoint** (`/justify`): 
-
-    This endpoint accepts a `POST` request with a body of ContentType `text/plain` and returns justified text.
-    Detailed documentation for this endpoint is available [here](http://tictactrip.whiterqbbit.io/api-docs/#/default/post_justify).
-
-3. **Token Endpoint** (`/token`): 
+2. **Token Endpoint** (`/token`): 
 
     A `POST` request with a JSON body containing an email field to this endpoint will return a token.
-    Detailed documentation for this endpoint is available [here](http://tictactrip.whiterqbbit.io/api-docs/#/default/post_token).
+    Doc for this endpoint [here](https://tictactrip.whiterqbbit.io/api-docs/#/default/post_token).
+
+3. **Justify Endpoint** (`/justify`): 
+
+    A `POST` request with a body of ContentType `text/plain` will returns justified text.
+    Doc for this endpoint [here](https://tictactrip.whiterqbbit.io/api-docs/#/default/post_justify).
 
 ## Installation
 
@@ -37,14 +38,13 @@ To set up and run this project locally, follow the below steps:
     DATABASE_URL=your_database_url
     ```
 
-
 3. Use Docker to run the project:
 
     ```bash
     docker-compose up
     ```
 
-4. Setup your pre-commit hook if needed in .git/hooks/pre-commit:
+4. Setup your pre-commit hook if needed in `.git/hooks/pre-commit`:
 
     ```bash
     #!/bin/sh
