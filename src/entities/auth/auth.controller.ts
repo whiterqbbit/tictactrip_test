@@ -21,7 +21,7 @@ export class AuthController {
         const token = await AuthHelper.renewIfExpired(user)
         return res.json({ token })
       } else {
-        const token = await createUser(email).then(user => user.token)
+        const token = await createUser(email).then(user => user?.token)
         return res.json({ token })
       }
     } catch (err) {
