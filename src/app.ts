@@ -21,22 +21,15 @@ app.use(express.text())
   .use(helmet({
     contentSecurityPolicy: {
       directives: {
-        defaultSrc: ['\'self\''],
-        scriptSrc: ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
-        styleSrc: ['\'self\'', '\'unsafe-inline\'']
-      }
-    }
+        defaultSrc: ['\'self\'', 'https:', 'http:', 'data:', 'blob:'],
+        scriptSrc: ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\'', 'https:', 'http:'],
+        styleSrc: ['\'self\'', '\'unsafe-inline\'', 'https:', 'http:'],
+        imgSrc: ['\'self\'', 'data:', 'https:', 'http:'],
+        fontSrc: ['\'self\'', 'https:', 'http:', 'data:']
+      },
+    },
   }))
-
-app.use((req, res, next) => {
-  res.header(
-    'Content-Security-Policy',
-    'default-src \'self\'; img-src \'self\' https:; script-src \'self\' https:; style-src \'self\' https:'
-  )
-  next()
-})
   
-
 const opts = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: config.JWT_SECRET
