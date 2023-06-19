@@ -1,6 +1,8 @@
+version: '3'
 services:
   db:
     image: "postgres"
+    container_name: db
     ports:
       - "2345:5432"
     environment:
@@ -10,7 +12,13 @@ services:
 
   server:
     build: .
+    container_name: server
+    volumes:
+      - /usr/src/app/node_modules
+      - .:/usr/src/app
     ports:
       - "5000:5000"
     environment:
       DATABASE_URL: "postgresql://postgres:postgres@db:5432/mydb?schema=public"
+    depends_on:
+      - db

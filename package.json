@@ -9,14 +9,15 @@
   },
   "scripts": {
     "start": "node dist/src/index.js",
-    "dev": "nodemon src/index.ts",
+    "dev": "nodemon",
     "build": "tsc",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
-    "pre-commit": "pnpm lint && pnpm typecheck && pnpm test",
+    "pre-commit": "pnpm lint && pnpm typecheck && pnpm test:docker",
     "postinstall": "npx prisma generate",
     "migrate": "npx prisma migrate dev --name init",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "test:docker": "docker exec server npm run test --coverage"
   },
   "author": "whiterqbbit",
   "license": "MIT",
