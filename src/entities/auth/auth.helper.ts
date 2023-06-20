@@ -20,6 +20,7 @@ export default class AuthHelper {
           await updateToken(user.email, newToken)
           return newToken
         }
+        throw err
       }
     }
     return token
